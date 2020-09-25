@@ -39,6 +39,11 @@ function Home(props) {
     //console.log(DEC, ENC);
   };
 
+  const clearBoth = () => {
+    setDEC("");
+    setENC("");
+  };
+
   return (
     <div className='row p-3'>
       <div className='col-md-5'>
@@ -93,7 +98,7 @@ function Home(props) {
       <div className='col-md-2 d-flex flex-column align-items-center justify-content-center'>
         {textOrFile ? (
           <button
-            className='btn btn-outline-info m-2'
+            className='btn btn-outline-info m-2 middle-btn'
             onClick={() => {
               let next = encoderOrDecoder === 1 ? 0 : 1;
               setencoderOrDecoder(next);
@@ -103,12 +108,21 @@ function Home(props) {
         ) : (
           ""
         )}
-        <button className='btn btn-outline-info m-2'>
+        <button className='btn btn-outline-info m-2 middle-btn'>
           {encoderOrDecoder ? "Encode" : "Decode"}
         </button>
         {textOrFile ? (
-          <button className='btn btn-outline-info m-2'>
+          <button className='btn btn-outline-info m-2 middle-btn'>
             Draw Huffman Tree
+          </button>
+        ) : (
+          ""
+        )}
+        {textOrFile ? (
+          <button
+            className='btn btn-outline-danger m-2 middle-btn'
+            onClick={clearBoth}>
+            Clear both
           </button>
         ) : (
           ""
