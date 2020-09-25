@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import binaryFileIcon from "./../assets/home/binary-file-icon.png";
 import textFileIcon from "./../assets/home/text-file-icon.png";
-
+import LoadingModal from "./loading";
 function Home(props) {
   /**
    * 1 : Text
@@ -71,18 +71,18 @@ function Home(props) {
             <form className='w-100 d-flex flex-column align-items-center justify-content-center'>
               <img src={textFileIcon} className='m-auto p-2 w-75' alt='' />
 
-              <div class='form-group'>
+              <div className='form-group'>
                 <input
                   type='file'
-                  class='form-control-file'
+                  className='form-control-file'
                   id='exampleFormControlFile1'
                 />
-                <small id='emailHelp' class='form-text text-muted'>
+                <small id='emailHelp' className='form-text text-muted'>
                   Only text file allowed to upload.
                 </small>
               </div>
               <div className='p-1'>
-                <button type='submit' class='btn btn-primary m-auto'>
+                <button type='submit' className='btn btn-primary m-auto'>
                   Upload File
                 </button>
               </div>
@@ -143,8 +143,8 @@ function Home(props) {
             <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
               <img src={binaryFileIcon} className='m-auto p-2 w-75' alt='' />
 
-              <div class='form-group p-1'>
-                <button type='submit' class='btn btn-primary m-auto'>
+              <div className='form-group p-1'>
+                <button type='submit' className='btn btn-primary m-auto'>
                   Download Output File
                 </button>
               </div>
@@ -152,6 +152,7 @@ function Home(props) {
           )}
         </div>
       </div>
+      <LoadingModal />
     </div>
   );
 }
