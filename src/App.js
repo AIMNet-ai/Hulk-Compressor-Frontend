@@ -7,7 +7,9 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes />
+      <div className='container py-3'>
+        <Routes />
+      </div>
     </Router>
   );
 }
