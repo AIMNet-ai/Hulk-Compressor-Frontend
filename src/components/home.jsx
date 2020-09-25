@@ -1,39 +1,158 @@
-import React from "react";
+import React, { useState } from "react";
 import binaryFileIcon from "./../assets/home/binary-file-icon.png";
 import textFileIcon from "./../assets/home/text-file-icon.png";
 
 function Home(props) {
   /**
-   * 1 : Text Encoder
-   * 0 : File Encoder
+   * 1 : Text
+   * 0 : File
+   *
+   * 1 : Encoder
+   * 0 : Decoder
    */
-  const { convert } = props;
-  console.log(convert);
+  let { convert } = props;
+  const [textOrFile, settextOrFile] = useState(convert);
+  const [encoderOrDecoder, setencoderOrDecoder] = useState(1);
+  const [DEC, setDEC] = useState("");
+  const [ENC, setENC] = useState("");
+
+  const checkValidBinary = (str) => {
+    const arr = str.split("");
+    // arr.forEach((element) => {
+    //   if (!(element === "0" || element === "1")) return false;
+    // });
+    for (let element of arr) {
+      if (!(element === "0" || element === "1")) return false;
+    }
+    return true;
+  };
+
+  const onChangeText = (e) => {
+    if (encoderOrDecoder) {
+      if (e.target.name === "DEC") setDEC(e.target.value);
+      else {
+        if (checkValidBinary(e.target.value)) setENC(e.target.value);
+      }
+    } else {
+      if (e.target.name === "ENC") setDEC(e.target.value);
+      else {
+        if (checkValidBinary(e.target.value)) setENC(e.target.value);
+      }
+    }
+    console.log(DEC, ENC);
+  };
+
   return (
-    <div className='row'>
+    <div className='row p-3'>
       <div className='col-md-5'>
         <div className='card border-round'>
           <div className='d-flex flex-row align-items-center'>
-            <h5 className='card-title p-2'>Input Text</h5>
-            <img src={textFileIcon} alt='' className='right-circled' />
+            <div className='d-flex flex-column p-2'>
+              <h5 className='text-bold'>Input Text</h5>
+              <small>
+                {encoderOrDecoder
+                  ? "(Simple Plain English Text)"
+                  : "(Huffman Endoded Binary Text)"}
+              </small>
+            </div>
+
+            <img
+              src={encoderOrDecoder ? textFileIcon : binaryFileIcon}
+              alt=''
+              className='right-circled'
+            />
           </div>
           <hr className='w-75 m-auto' />
-          <textarea cols='30' rows='15'></textarea>
+          {textOrFile ? (
+            <textarea
+              cols='30'
+              rows='15'
+              name='DEC'
+              onChange={onChangeText}
+              value={encoderOrDecoder ? DEC : ENC}></textarea>
+          ) : (
+            <form className='w-100 d-flex flex-column align-items-center justify-content-center'>
+              <img src={textFileIcon} className='m-auto p-2 w-75' alt='' />
+
+              <div class='form-group'>
+                <input
+                  type='file'
+                  class='form-control-file'
+                  id='exampleFormControlFile1'
+                />
+                <small id='emailHelp' class='form-text text-muted'>
+                  Only text file allowed to upload.
+                </small>
+              </div>
+              <div className='p-1'>
+                <button type='submit' class='btn btn-primary m-auto'>
+                  Upload File
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
       <div className='col-md-2 d-flex flex-column align-items-center justify-content-center'>
-        <button className='btn btn-outline-info m-2'>Revert Selection</button>
-        <button className='btn btn-outline-info m-2'>Encode/Decode</button>
-        <button className='btn btn-outline-info m-2'>Draw Huffman Tree</button>
+        {textOrFile ? (
+          <button
+            className='btn btn-outline-info m-2'
+            onClick={() => {
+              let next = encoderOrDecoder === 1 ? 0 : 1;
+              setencoderOrDecoder(next);
+            }}>
+            Revert Selection
+          </button>
+        ) : (
+          ""
+        )}
+        <button className='btn btn-outline-info m-2'>
+          {encoderOrDecoder ? "Encode" : "Decode"}
+        </button>
+        {textOrFile ? (
+          <button className='btn btn-outline-info m-2'>
+            Draw Huffman Tree
+          </button>
+        ) : (
+          ""
+        )}
       </div>
       <div className='col-md-5'>
         <div className='card border-round'>
           <div className='d-flex flex-row align-items-center'>
-            <h5 className='card-title p-2'>Output Text</h5>
-            <img src={binaryFileIcon} alt='' className='right-circled' />
+            <div className='d-flex flex-column p-2'>
+              <h5 className='text-bold'>Output Text</h5>
+              <small>
+                {!encoderOrDecoder
+                  ? "(Simple Plain English Text)"
+                  : "(Huffman Endoded Binary Text)"}
+              </small>
+            </div>
+            <img
+              src={encoderOrDecoder ? binaryFileIcon : textFileIcon}
+              alt=''
+              className='right-circled'
+            />
           </div>
           <hr className='w-75 m-auto' />
-          <textarea cols='30' rows='15'></textarea>
+          {textOrFile ? (
+            <textarea
+              cols='30'
+              rows='15'
+              name='ENC'
+              onChange={onChangeText}
+              value={!encoderOrDecoder ? DEC : ENC}></textarea>
+          ) : (
+            <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
+              <img src={binaryFileIcon} className='m-auto p-2 w-75' alt='' />
+
+              <div class='form-group p-1'>
+                <button type='submit' class='btn btn-primary m-auto'>
+                  Download Output File
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
