@@ -18,3 +18,8 @@
 .card {
   min-height: 60vh;
 }
+
+.middle-btn {
+  width: 100%;
+  margin: auto;
+}
