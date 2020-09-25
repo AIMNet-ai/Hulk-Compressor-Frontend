@@ -18,9 +18,6 @@ function Home(props) {
 
   const checkValidBinary = (str) => {
     const arr = str.split("");
-    // arr.forEach((element) => {
-    //   if (!(element === "0" || element === "1")) return false;
-    // });
     for (let element of arr) {
       if (!(element === "0" || element === "1")) return false;
     }
@@ -39,7 +36,7 @@ function Home(props) {
         if (checkValidBinary(e.target.value)) setENC(e.target.value);
       }
     }
-    console.log(DEC, ENC);
+    //console.log(DEC, ENC);
   };
 
   return (
