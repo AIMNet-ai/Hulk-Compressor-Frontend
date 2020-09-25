@@ -13,17 +13,13 @@ function Navbar() {
           alt='Main App Hulk Logo'
         />
         <ul className='navbar-nav'>
-          <li class='nav-item active mx-3'>
-            <Link class='nav-link' to='/home'>
-              Hulk-Huffman Compressor
-            </Link>
-          </li>
+          <li className='nav-item active mx-3'>Hulk-Huffman Compressor</li>
         </ul>
       </Link>
-      <ul class='navbar-nav ml-auto'>
-        <li class='nav-item active mx-3'>
-          <Link class='nav-link' to='/about'>
-            About <span class='sr-only'>(current)</span>
+      <ul className='navbar-nav ml-auto'>
+        <li className='nav-item active mx-3'>
+          <Link className='nav-link' to='/about'>
+            About <span className='sr-only'>(current)</span>
           </Link>
         </li>
       </ul>
