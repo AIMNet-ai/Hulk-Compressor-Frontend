@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 import binaryFileIcon from "./../assets/home/binary-file-icon.png";
 import textFileIcon from "./../assets/home/text-file-icon.png";
 import LoadingModal from "./loading";
@@ -13,8 +15,8 @@ function Home(props) {
   let { convert } = props;
   const [textOrFile, settextOrFile] = useState(convert);
   const [encoderOrDecoder, setencoderOrDecoder] = useState(1);
-  const [DEC, setDEC] = useState("");
-  const [ENC, setENC] = useState("");
+  const [DEC, setDEC] = useState("asasssddssdsdaa");
+  const [ENC, setENC] = useState("10011011110001111010");
 
   const checkValidBinary = (str) => {
     const arr = str.split("");
@@ -22,6 +24,30 @@ function Home(props) {
       if (!(element === "0" || element === "1")) return false;
     }
     return true;
+  };
+
+  const calculateOperation = () => {
+    if (encoderOrDecoder) {
+      //Encoder Logic here
+      axios
+        .post("http://localhost:5000/api/huffman-text-encode", {
+          payload: DEC.toString(),
+        })
+        .then((res) => {
+          console.log(res.data);
+          setENC(res.data.output);
+        });
+    } else {
+      //Decoder Logic here
+      axios
+        .post("http://localhost:3000/api/huffman-text-decode", {
+          payload: ENC.toString(),
+        })
+        .then((res) => {
+          console.log(res.data);
+          setDEC(res.data.output);
+        });
+    }
   };
 
   const onChangeText = (e) => {
@@ -108,7 +134,9 @@ function Home(props) {
         ) : (
           ""
         )}
-        <button className='btn btn-outline-info m-2 middle-btn'>
+        <button
+          className='btn btn-outline-info m-2 middle-btn'
+          onClick={calculateOperation}>
           {encoderOrDecoder ? "Encode" : "Decode"}
         </button>
         {textOrFile ? (
