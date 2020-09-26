@@ -20,7 +20,7 @@ function Home(props) {
   const [tree, settree] = useState({});
   const [showtree, setshowtree] = useState(false);
   const [result, setresult] = useState({});
-
+  const [modalshow, setmodalshow] = useState(false);
   const checkValidBinary = (str) => {
     const arr = str.split("");
     for (let element of arr) {
@@ -41,6 +41,7 @@ function Home(props) {
             console.log(res.data);
             setENC(res.data.output);
             setresult(res.data);
+            setmodalshow(true);
           });
       }
     } else {
@@ -54,6 +55,7 @@ function Home(props) {
             console.log(res.data);
             setDEC(res.data.output);
             setresult(res.data);
+            setmodalshow(true);
           });
       }
     }
@@ -216,24 +218,8 @@ function Home(props) {
           </div>
         </div>
 
-        <LoadingModal isOpen={false} />
+        <LoadingModal isOpen={modalshow} data={result} />
       </div>
-      {showtree ? (
-        <div className='row'>
-          <div className='col-5'>
-            <h6>Huffman Tree Here</h6>
-            <br />
-            <pre>{JSON.stringify(tree, null, 2)}</pre>
-          </div>
-          <div className='col-7'>
-            <span className='badge badge-warning p-2'>Input File Size</span>
-            <span className='badge badge-warning p-2'>Output File Size</span>
-            <span className='badge badge-warning p-3'>Compression Ratio</span>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
     </>
   );
 }
