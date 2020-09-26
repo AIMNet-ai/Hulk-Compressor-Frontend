@@ -13,12 +13,10 @@ function Home(props) {
    * 0 : Decoder
    */
   let { convert } = props;
-  const [textOrFile, settextOrFile] = useState(convert);
+  const textOrFile = convert;
   const [encoderOrDecoder, setencoderOrDecoder] = useState(1);
   const [DEC, setDEC] = useState("asasssddssdsdaa");
   const [ENC, setENC] = useState("10011011110001111010");
-  const [tree, settree] = useState({});
-  const [showtree, setshowtree] = useState(false);
   const [result, setresult] = useState({});
   const [modalshow, setmodalshow] = useState(false);
   const checkValidBinary = (str) => {
@@ -121,7 +119,11 @@ function Home(props) {
                 value={encoderOrDecoder ? DEC : ENC}></textarea>
             ) : (
               <form className='w-100 d-flex flex-column align-items-center justify-content-center'>
-                <img src={textFileIcon} className='m-auto p-2 w-75' alt='' />
+                <img
+                  src={textFileIcon}
+                  className='m-auto p-2 form-img'
+                  alt=''
+                />
 
                 <div className='form-group'>
                   <input
@@ -207,7 +209,11 @@ function Home(props) {
                 value={!encoderOrDecoder ? DEC : ENC}></textarea>
             ) : (
               <div className='w-100 d-flex flex-column align-items-center justify-content-center'>
-                <img src={binaryFileIcon} className='m-auto p-2 w-75' alt='' />
+                <img
+                  src={binaryFileIcon}
+                  className='m-auto p-2 form-img'
+                  alt=''
+                />
 
                 <div className='form-group p-1'>
                   <button type='submit' className='btn btn-primary m-auto'>
@@ -218,7 +224,15 @@ function Home(props) {
             )}
           </div>
         </div>
-        {modalshow ? <LoadingModal isOpen={modalshow} data={result} setmodalshow={setmodalshow}/> : ""}
+        {modalshow ? (
+          <LoadingModal
+            isOpen={modalshow}
+            data={result}
+            setmodalshow={setmodalshow}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
