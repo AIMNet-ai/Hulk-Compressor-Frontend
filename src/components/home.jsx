@@ -218,8 +218,7 @@ function Home(props) {
             )}
           </div>
         </div>
-
-        <LoadingModal isOpen={modalshow} data={result} />
+        {modalshow ? <LoadingModal isOpen={modalshow} data={result} setmodalshow={setmodalshow}/> : ""}
       </div>
     </>
   );

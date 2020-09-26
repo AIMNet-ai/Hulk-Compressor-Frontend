@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { Button, Modal } from "reactstrap";
 
 const LoadingModal = (props) => {
-  const { buttonLabel, data } = props;
-
-  const toggle = () => (props.isOpen = !props.isOpen);
+  const { buttonLabel, data, setmodalshow } = props;
+  const [ipOpen, setipOpen] = useState(props.isOpen);
+  const toggle = () => {
+    setipOpen(!ipOpen);
+    setmodalshow(!ipOpen);
+  };
 
   return (
     <div>
-      <Button color='danger' onClick={toggle}>
-        {buttonLabel}
-      </Button>
       <Modal
-        isOpen={props.isOpen}
+        isOpen={ipOpen}
         toggle={toggle}
         className='d-flex justify-content-center align-items-center'
         style={{ height: "80vh" }}>
+        <Button color='danger' onClick={toggle}>
+          Close
+        </Button>
         <div
           className='row justify-content-center align-items-center'
           style={{ padding: "10px" }}>
