@@ -62,11 +62,12 @@ function Home(props) {
   };
 
   const seeHuffmanTree = () => {
-    axios.get("http://localhost:5000/api/get-tree").then((res) => {
-      settree(res.data.tree);
-      setshowtree(true);
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+    // axios.get("http://localhost:5000/api/get-tree").then((res) => {
+    //   settree(res.data.tree);
+    //   setshowtree(true);
+    //   window.scrollTo(0, document.body.scrollHeight);
+    // });
+    setmodalshow(true);
   };
 
   const onChangeText = (e) => {
