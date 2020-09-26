@@ -19,6 +19,12 @@ function Home(props) {
   const [ENC, setENC] = useState("10011011110001111010");
   const [result, setresult] = useState({});
   const [modalshow, setmodalshow] = useState(false);
+  const [fileToUpload, setfileToUpload] = useState(null);
+
+  const onChangeFile = (e) => {
+    setfileToUpload(e.target.files[0]);
+  };
+
   const checkValidBinary = (str) => {
     const arr = str.split("");
     for (let element of arr) {
@@ -60,11 +66,6 @@ function Home(props) {
   };
 
   const seeHuffmanTree = () => {
-    // axios.get("http://localhost:5000/api/get-tree").then((res) => {
-    //   settree(res.data.tree);
-    //   setshowtree(true);
-    //   window.scrollTo(0, document.body.scrollHeight);
-    // });
     setmodalshow(true);
   };
 
@@ -86,6 +87,24 @@ function Home(props) {
   const clearBoth = () => {
     setDEC("");
     setENC("");
+  };
+
+  const FormSubmit = (e) => {
+    e.preventDefault();
+    const fileUpload = (file) => {
+      const url = "http://localhost:5000/api/upload-normal-file";
+      const formData = new FormData();
+      formData.append("file", file);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      return axios.post(url, formData, config);
+    };
+    fileUpload(fileToUpload).then((response) => {
+      console.log(response.data);
+    });
   };
 
   return (
@@ -118,7 +137,9 @@ function Home(props) {
                 onChange={onChangeText}
                 value={encoderOrDecoder ? DEC : ENC}></textarea>
             ) : (
-              <form className='w-100 d-flex flex-column align-items-center justify-content-center'>
+              <form
+                className='w-100 d-flex flex-column align-items-center justify-content-center'
+                onSubmit={FormSubmit}>
                 <img
                   src={textFileIcon}
                   className='m-auto p-2 form-img'
@@ -128,8 +149,10 @@ function Home(props) {
                 <div className='form-group'>
                   <input
                     type='file'
+                    name='file'
                     className='form-control-file'
                     id='exampleFormControlFile1'
+                    onChange={onChangeFile}
                   />
                   <small id='emailHelp' className='form-text text-muted'>
                     Only text file allowed to upload.
