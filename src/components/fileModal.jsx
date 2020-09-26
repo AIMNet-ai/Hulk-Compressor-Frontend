@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, Modal } from "reactstrap";
 
-const LoadingModal = (props) => {
-  const { data, setmodalshow } = props;
+const FileModal = (props) => {
+  const { data, toggler } = props;
   const [ipOpen, setipOpen] = useState(props.isOpen);
   const toggle = () => {
     setipOpen(!ipOpen);
-    setmodalshow(!ipOpen);
+    toggler(!ipOpen);
   };
 
   return (
@@ -22,11 +22,21 @@ const LoadingModal = (props) => {
         <div
           className='row justify-content-center align-items-center'
           style={{ padding: "10px" }}>
-          <div className='col-4'>
-            <h6>Huffman Tree Here</h6>
-            <pre>{JSON.stringify(data.tree, null, 2)}</pre>
+          <div className='col-5 justify-content-center align-items-center'>
+            <a
+              className='btn btn-primary m-1 p-3'
+              href={`http://localhost:5000/decoded/${data.id}`}>
+              Download Input File
+            </a>
+            <br />
+            <a
+              className='btn btn-primary m-1 p-3'
+              href={`http://localhost:5000/encoded-compressed/${data.id}`}>
+              Download Output File
+            </a>
+            <br />
           </div>
-          <div className='col-8 justify-content-center align-items-center'>
+          <div className='col-7 justify-content-center align-items-center'>
             <span
               className='badge badge-warning m-1 p-2'
               style={{ minWidth: "140px" }}>
@@ -60,4 +70,4 @@ const LoadingModal = (props) => {
   );
 };
 
-export default LoadingModal;
+export default FileModal;

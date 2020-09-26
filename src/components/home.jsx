@@ -4,6 +4,8 @@ import axios from "axios";
 import binaryFileIcon from "./../assets/home/binary-file-icon.png";
 import textFileIcon from "./../assets/home/text-file-icon.png";
 import LoadingModal from "./loading";
+import FileModal from "./fileModal";
+
 function Home(props) {
   /**
    * 1 : Text
@@ -19,7 +21,10 @@ function Home(props) {
   const [ENC, setENC] = useState("10011011110001111010");
   const [result, setresult] = useState({});
   const [modalshow, setmodalshow] = useState(false);
-  const [fileToUpload, setfileToUpload] = useState(null);
+
+  const [fileToUpload, setfileToUpload] = useState("");
+  const [fileData, setfileData] = useState({});
+  const [fileModalBool, setfileModalBool] = useState(false);
 
   const onChangeFile = (e) => {
     setfileToUpload(e.target.files[0]);
@@ -34,34 +39,57 @@ function Home(props) {
   };
 
   const calculateOperation = () => {
-    if (encoderOrDecoder) {
-      //Encoder Logic here
-      if (DEC !== "") {
-        axios
-          .post("http://localhost:5000/api/huffman-text-encode", {
-            payload: DEC.toString(),
-          })
-          .then((res) => {
-            console.log(res.data);
-            setENC(res.data.output);
-            setresult(res.data);
-            setmodalshow(true);
-          });
+    if (textOrFile) {
+      if (encoderOrDecoder) {
+        //Encoder Logic here
+        console.log("Text Encoder");
+        if (DEC !== "") {
+          axios
+            .post("http://localhost:5000/api/huffman-text-encode", {
+              payload: DEC.toString(),
+            })
+            .then((res) => {
+              console.log(res.data);
+              setENC(res.data.output);
+              setresult(res.data);
+              setmodalshow(true);
+            });
+        }
+      } else {
+        //Decoder Logic here
+        console.log("Text Decoder");
+
+        if (ENC !== "") {
+          axios
+            .post("http://localhost:5000/api/huffman-text-decode", {
+              payload: ENC.toString(),
+            })
+            .then((res) => {
+              console.log(res.data);
+              setDEC(res.data.output);
+              setresult(res.data);
+              setmodalshow(true);
+            });
+        }
       }
     } else {
-      //Decoder Logic here
-      if (ENC !== "") {
-        axios
-          .post("http://localhost:3000/api/huffman-text-decode", {
-            payload: ENC.toString(),
-          })
-          .then((res) => {
-            console.log(res.data);
-            setDEC(res.data.output);
-            setresult(res.data);
-            setmodalshow(true);
-          });
-      }
+      console.log("file encoder logic");
+      const fileUpload = (file) => {
+        const url = "http://localhost:5000/api/upload-normal-file";
+        const formData = new FormData();
+        formData.append("file", file);
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        return axios.post(url, formData, config);
+      };
+      fileUpload(fileToUpload).then((response) => {
+        console.log(response.data);
+        setfileData(response.data);
+        setfileModalBool(true);
+      });
     }
   };
 
@@ -85,26 +113,18 @@ function Home(props) {
   };
 
   const clearBoth = () => {
-    setDEC("");
-    setENC("");
+    if (textOrFile) {
+      setDEC("");
+      setENC("");
+    } else {
+      setfileData({});
+      setfileToUpload("");
+      setfileModalBool(false);
+    }
   };
 
   const FormSubmit = (e) => {
     e.preventDefault();
-    const fileUpload = (file) => {
-      const url = "http://localhost:5000/api/upload-normal-file";
-      const formData = new FormData();
-      formData.append("file", file);
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-      return axios.post(url, formData, config);
-    };
-    fileUpload(fileToUpload).then((response) => {
-      console.log(response.data);
-    });
   };
 
   return (
@@ -158,11 +178,11 @@ function Home(props) {
                     Only text file allowed to upload.
                   </small>
                 </div>
-                <div className='p-1'>
-                  <button type='submit' className='btn btn-primary m-auto'>
-                    Upload File
-                  </button>
-                </div>
+
+                {/*
+                <button type='submit' className='btn btn-primary m-auto'>
+                  Upload File
+</button>*/}
               </form>
             )}
           </div>
@@ -194,15 +214,12 @@ function Home(props) {
           ) : (
             ""
           )}
-          {textOrFile ? (
-            <button
-              className='btn btn-outline-danger m-2 middle-btn'
-              onClick={clearBoth}>
-              Clear both
-            </button>
-          ) : (
-            ""
-          )}
+
+          <button
+            className='btn btn-outline-danger m-2 middle-btn'
+            onClick={clearBoth}>
+            Clear both
+          </button>
         </div>
         <div className='col-md-5'>
           <div className='card border-round'>
@@ -237,12 +254,25 @@ function Home(props) {
                   className='m-auto p-2 form-img'
                   alt=''
                 />
-
-                <div className='form-group p-1'>
-                  <button type='submit' className='btn btn-primary m-auto'>
-                    Download Output File
-                  </button>
-                </div>
+                {fileData.id ? (
+                  <>
+                    <span className='badge badge-info p-1'>
+                      Output File Size : {`${fileData.outputSize} bytes`}
+                    </span>
+                    <span className='badge badge-info p-1'>
+                      name : {`${fileData.id}.bin`}
+                    </span>
+                    <div className='form-group p-1'>
+                      <a
+                        className='btn btn-primary m-auto'
+                        href={`http://localhost:5000/encoded-compressed/${fileData.id}`}>
+                        Download Output File
+                      </a>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
             )}
           </div>
@@ -252,6 +282,15 @@ function Home(props) {
             isOpen={modalshow}
             data={result}
             setmodalshow={setmodalshow}
+          />
+        ) : (
+          ""
+        )}
+        {fileModalBool ? (
+          <FileModal
+            isOpen={fileModalBool}
+            toggler={setfileModalBool}
+            data={fileData}
           />
         ) : (
           ""
