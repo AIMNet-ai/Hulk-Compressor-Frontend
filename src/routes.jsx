@@ -7,8 +7,7 @@ import Tabbed from "./components/tabbed";
 function Routes() {
   return (
     <Switch>
-      <Route exact path='/home' component={Home} />
-      <Route exact path='/tabbed' component={Tabbed} />
+      <Route exact path='/home' component={Tabbed} />
       <Route exact path='/about' component={About} />
       <Redirect from='/' to='/home' />
     </Switch>
