@@ -3,7 +3,7 @@ import axios from "axios";
 
 import binaryFileIcon from "./../assets/home/binary-file-icon.png";
 import textFileIcon from "./../assets/home/text-file-icon.png";
-import LoadingModal from "./loading";
+import TextModal from "./textModal";
 import FileModal from "./fileModal";
 
 function Home(props) {
@@ -278,7 +278,7 @@ function Home(props) {
           </div>
         </div>
         {modalshow ? (
-          <LoadingModal
+          <TextModal
             isOpen={modalshow}
             data={result}
             setmodalshow={setmodalshow}

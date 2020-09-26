@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "reactstrap";
 
-const LoadingModal = (props) => {
+const TextModal = (props) => {
   const { data, setmodalshow } = props;
   const [ipOpen, setipOpen] = useState(props.isOpen);
   const toggle = () => {
@@ -60,4 +60,4 @@ const LoadingModal = (props) => {
   );
 };
 
-export default LoadingModal;
+export default TextModal;
