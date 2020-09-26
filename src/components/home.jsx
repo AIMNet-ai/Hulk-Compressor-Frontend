@@ -29,24 +29,28 @@ function Home(props) {
   const calculateOperation = () => {
     if (encoderOrDecoder) {
       //Encoder Logic here
-      axios
-        .post("http://localhost:5000/api/huffman-text-encode", {
-          payload: DEC.toString(),
-        })
-        .then((res) => {
-          console.log(res.data);
-          setENC(res.data.output);
-        });
+      if (DEC !== "") {
+        axios
+          .post("http://localhost:5000/api/huffman-text-encode", {
+            payload: DEC.toString(),
+          })
+          .then((res) => {
+            console.log(res.data);
+            setENC(res.data.output);
+          });
+      }
     } else {
       //Decoder Logic here
-      axios
-        .post("http://localhost:3000/api/huffman-text-decode", {
-          payload: ENC.toString(),
-        })
-        .then((res) => {
-          console.log(res.data);
-          setDEC(res.data.output);
-        });
+      if (ENC !== "") {
+        axios
+          .post("http://localhost:3000/api/huffman-text-decode", {
+            payload: ENC.toString(),
+          })
+          .then((res) => {
+            console.log(res.data);
+            setDEC(res.data.output);
+          });
+      }
     }
   };
 
