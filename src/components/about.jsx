@@ -32,20 +32,36 @@ function About() {
 
           <ul className='list-group'>
             <li className='list-group-item d-flex flex-row'>
+              <i
+                className='fas fa-user-shield mx-1'
+                style={{ fontSize: "20px" }}></i>
+              {"   "}
               Jayesh Shelar
               <span className='badge badge-primary p-1 ml-auto'>
                 TECOB254
               </span>{" "}
             </li>
             <li className='list-group-item d-flex flex-row'>
+              <i
+                className='fas fa-user-shield mx-1'
+                style={{ fontSize: "20px" }}></i>
+              {"   "}
               Dhanashree Bhandari{" "}
               <span className='badge badge-primary p-1 ml-auto'>TECOB203</span>
             </li>
             <li className='list-group-item d-flex flex-row'>
+              <i
+                className='fas fa-user-shield mx-1'
+                style={{ fontSize: "20px" }}></i>
+              {"   "}
               Mayank Pachpande{" "}
               <span className='badge badge-primary p-1 ml-auto'> TECOB230</span>
             </li>
             <li className='list-group-item d-flex flex-row'>
+              <i
+                className='fas fa-user-shield mx-1'
+                style={{ fontSize: "20px" }}></i>
+              {"   "}
               Dipak Ghatole{" "}
               <span className='badge badge-primary p-1 ml-auto'>TECOB206</span>
             </li>
