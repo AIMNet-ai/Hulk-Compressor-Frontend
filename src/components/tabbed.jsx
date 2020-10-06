@@ -18,6 +18,7 @@ const Tabbed = (props) => {
             onClick={() => {
               toggle("1");
             }}>
+            <i className='fas fa-text-height' style={{ fontSize: "20px" }}></i>{" "}
             Text Compression
           </NavLink>
         </NavItem>
@@ -27,6 +28,7 @@ const Tabbed = (props) => {
             onClick={() => {
               toggle("2");
             }}>
+            <i className='fas fa-file-alt' style={{ fontSize: "20px" }}></i>{" "}
             File Compression
           </NavLink>
         </NavItem>

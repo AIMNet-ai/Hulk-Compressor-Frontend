@@ -21,11 +21,15 @@ function Navbar() {
       <ul className='navbar-nav d-flex flex-row ml-auto'>
         <li className='nav-item font-weight-bold mx-3'>
           <Link className='nav-link' to='/how-it-works'>
+            <i className='fas fa-cogs m-1' style={{ fontSize: "15px" }}></i>
             How it works <span className='sr-only'>(current)</span>
           </Link>
         </li>
         <li className='nav-item font-weight-bold mx-3'>
           <Link className='nav-link' to='/about'>
+            <i
+              className='far fa-address-card m-1'
+              style={{ fontSize: "15px" }}></i>
             About <span className='sr-only'>(current)</span>
           </Link>
         </li>

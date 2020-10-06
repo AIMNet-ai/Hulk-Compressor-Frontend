@@ -195,13 +195,15 @@ function Home(props) {
                 let next = encoderOrDecoder === 1 ? 0 : 1;
                 setencoderOrDecoder(next);
               }}>
+              <i className='fas fa-recycle' style={{ fontSize: "20px" }}></i>
+              <br />
               Revert Selection
             </button>
           ) : (
             ""
           )}
           <button
-            className='btn btn-outline-info m-2 middle-btn'
+            className='btn btn-outline-success m-2 middle-btn'
             onClick={calculateOperation}>
             {encoderOrDecoder ? "Encode" : "Decode"}
           </button>
@@ -209,6 +211,8 @@ function Home(props) {
             <button
               className='btn btn-outline-info m-2 middle-btn'
               onClick={seeHuffmanTree}>
+              <i className='fas fa-poll-h' style={{ fontSize: "20px" }}></i>
+              <br />
               See Huffman Tree
             </button>
           ) : (
@@ -218,6 +222,7 @@ function Home(props) {
           <button
             className='btn btn-outline-danger m-2 middle-btn'
             onClick={clearBoth}>
+            <i className='fas fa-trash-alt ' style={{ fontSize: "20px" }}></i>{" "}
             Clear both
           </button>
         </div>
