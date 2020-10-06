@@ -33,3 +33,35 @@
 .form-img {
   width: 60%;
 }
+
+/************************************************************/
+/*  About Styling */
+.green-underline {
+  border-bottom: 2px solid green;
+  box-shadow: 0 0 1px greenyellow;
+}
+
+table,
+tr,
+td {
+  border: none;
+}
+
+/* Team Member Cards */
+.team-members {
+  border-radius: 50vh;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+
+/* Team Member Cards */
+.team-members:hover {
+  border: 5px solid green;
+}
+
+.list-group-item.d-flex.flex-row:hover {
+  background: green;
+  color: white;
+  font-weight: bold;
+}

@@ -18,13 +18,13 @@ function About() {
       <div className='row' style={{ padding: "25px" }}>
         <div className='col-7' style={{ padding: "25px 10px" }}>
           <h4>
-            <span className='p-1 badge badge-primary'>Project Title</span>Image
-            and Text compression and encryption using hybrid approach
+            <span className='green-underline'>Project Title </span>Image and
+            Text compression and encryption using hybrid approach
           </h4>
           <p className='py-2'>
-            <span className='p-1 badge badge-primary'>Project Decription</span>{" "}
-            A data compression algorithm is to be developed which consumes less
-            time while provides more compression ratio as compared to existing
+            <span className='green-underline'>Project Decription</span> A data
+            compression algorithm is to be developed which consumes less time
+            while provides more compression ratio as compared to existing
             techniques. We represent a hybrid approach to compress the text
             data. This hybrid approach is combination of Dynamic Bit reduction
             method and Huffman coding.
@@ -50,68 +50,30 @@ function About() {
               <span className='badge badge-primary p-1 ml-auto'>TECOB206</span>
             </li>
           </ul>
+          {/*
           <Link
             className='btn btn-warning m-2'
             style={{ borderRadius: "50vh" }}>
             How it Works...
           </Link>
+          */}
         </div>
         <div className='col-4'>
           <table className='table'>
             <tr>
               <td>
-                <img
-                  src={Jayesh}
-                  alt=''
-                  style={{
-                    borderRadius: "50vh",
-                    width: "100%",
-                    margin: "auto",
-                    width: "200px",
-                    height: "200px",
-                  }}
-                />
+                <img src={Jayesh} alt='' className='team-members' />
               </td>
               <td>
-                <img
-                  src={Dhannashri}
-                  alt=''
-                  style={{
-                    borderRadius: "50vh",
-                    width: "100%",
-                    margin: "auto",
-                    width: "200px",
-                    height: "200px",
-                  }}
-                />
+                <img src={Dhannashri} alt='' className='team-members' />
               </td>
             </tr>
             <tr>
               <td>
-                <img
-                  src={Mayank}
-                  alt=''
-                  style={{
-                    borderRadius: "50vh",
-                    width: "100%",
-                    margin: "auto",
-                    width: "200px",
-                    height: "200px",
-                  }}
-                />
+                <img src={Mayank} alt='' className='team-members' />
               </td>
               <td>
-                <img
-                  src={Deepak}
-                  alt=''
-                  style={{
-                    borderRadius: "50vh",
-                    width: "100%",
-                    margin: "auto",
-                    width: "200px",
-                    height: "200px",
-                  }}
-                />
+                <img src={Deepak} alt='' className='team-members' />
               </td>
             </tr>
           </table>
