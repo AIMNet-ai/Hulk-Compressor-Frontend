@@ -13,7 +13,9 @@ function Navbar() {
           alt='Main App Hulk Logo'
         />
         <ul className='navbar-nav'>
-          <li className='nav-item active mx-3'>Hulk-Huffman Compressor</li>
+          <li className='nav-item active mx-3 green-underline'>
+            Hulk-Huffman Compressor
+          </li>
         </ul>
       </Link>
       <ul className='navbar-nav d-flex flex-row ml-auto'>
