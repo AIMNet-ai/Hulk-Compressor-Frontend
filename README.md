@@ -19,3 +19,5 @@ method and Huffman coding.
 ![](https://github.com/AIMNet-ai/Hulk-Compressor-Frontend/blob/master/SS/2.PNG?raw=true)
 ![](https://github.com/AIMNet-ai/Hulk-Compressor-Frontend/blob/master/SS/3.PNG?raw=true)
 ![](https://github.com/AIMNet-ai/Hulk-Compressor-Frontend/blob/master/SS/4.PNG?raw=true)
+![](https://github.com/AIMNet-ai/Hulk-Compressor-Frontend/blob/master/SS/7.PNG?raw=true)
+![](https://github.com/AIMNet-ai/Hulk-Compressor-Frontend/blob/master/SS/8.PNG?raw=true)
