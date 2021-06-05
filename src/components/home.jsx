@@ -77,7 +77,7 @@ function Home(props) {
     } else {
       console.log("file encoder logic");
       const fileUpload = (file) => {
-        const url = "${url}api/upload-normal-file";
+        const urlX = "${url}api/upload-normal-file";
         const formData = new FormData();
         formData.append("file", file);
         const config = {
@@ -85,7 +85,7 @@ function Home(props) {
             "content-type": "multipart/form-data",
           },
         };
-        return axios.post(url, formData, config);
+        return axios.post(urlX, formData, config);
       };
       fileUpload(fileToUpload).then((response) => {
         console.log(response.data);
