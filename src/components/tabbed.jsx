@@ -22,7 +22,7 @@ const Tabbed = (props) => {
             Text Compression
           </NavLink>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <NavLink
             className={classnames({ active: activeTab === "2" })}
             onClick={() => {
@@ -31,7 +31,7 @@ const Tabbed = (props) => {
             <i className='fas fa-file-alt' style={{ fontSize: "20px" }}></i>{" "}
             File Compression
           </NavLink>
-        </NavItem>
+        </NavItem> */}
       </Nav>
       <TabContent activeTab={activeTab}>
         <TabPane tabId='1'>

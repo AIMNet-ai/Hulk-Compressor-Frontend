@@ -6,6 +6,8 @@ import textFileIcon from "./../assets/home/text-file-icon.png";
 import TextModal from "./textModal";
 import FileModal from "./fileModal";
 
+const url = "https://compress-encrypt-backend.herokuapp.com/";
+
 function Home(props) {
   /**
    * 1 : Text
@@ -45,7 +47,7 @@ function Home(props) {
         console.log("Text Encoder");
         if (DEC !== "") {
           axios
-            .post("http://localhost:5000/api/huffman-text-encode", {
+            .post(`${url}api/huffman-text-encode`, {
               payload: DEC.toString(),
             })
             .then((res) => {
@@ -61,7 +63,7 @@ function Home(props) {
 
         if (ENC !== "") {
           axios
-            .post("http://localhost:5000/api/huffman-text-decode", {
+            .post(`${url}api/huffman-text-decode`, {
               payload: ENC.toString(),
             })
             .then((res) => {
@@ -75,7 +77,7 @@ function Home(props) {
     } else {
       console.log("file encoder logic");
       const fileUpload = (file) => {
-        const url = "http://localhost:5000/api/upload-normal-file";
+        const url = "${url}api/upload-normal-file";
         const formData = new FormData();
         formData.append("file", file);
         const config = {
@@ -270,7 +272,7 @@ function Home(props) {
                     <div className='form-group p-1'>
                       <a
                         className='btn btn-primary m-auto'
-                        href={`http://localhost:5000/encoded-compressed/${fileData.id}`}>
+                        href={`${url}encoded-compressed/${fileData.id}`}>
                         Download Output File
                       </a>
                     </div>

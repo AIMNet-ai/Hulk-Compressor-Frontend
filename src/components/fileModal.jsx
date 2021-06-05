@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal } from "reactstrap";
 import hulkLoading from "./../assets/hulk-loading.gif";
+const url = "https://compress-encrypt-backend.herokuapp.com/";
 
 const FileModal = (props) => {
   const { data, toggler } = props;
@@ -36,13 +37,13 @@ const FileModal = (props) => {
               <div className='col-5 justify-content-center align-items-center'>
                 <a
                   className='btn btn-primary m-1 p-3'
-                  href={`http://localhost:5000/decoded/${data.id}`}>
+                  href={`${url}decoded/${data.id}`}>
                   Download Input File
                 </a>
                 <br />
                 <a
                   className='btn btn-primary m-1 p-3'
-                  href={`http://localhost:5000/encoded-compressed/${data.id}`}>
+                  href={`${url}encoded-compressed/${data.id}`}>
                   Download Output File
                 </a>
                 <br />
